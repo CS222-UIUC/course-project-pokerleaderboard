@@ -1,1 +1,1 @@
-"# course-project-pokerleaderboard" 
+"# CS 222 Project: Poker Leaderboard" 
