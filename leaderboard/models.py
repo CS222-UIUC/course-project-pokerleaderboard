@@ -7,7 +7,7 @@ class Player(models.Model):
     peak_amount = models.PositiveIntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     def __str__(self):
-        return "yolo"
+        return self.user.get_username()
 
 class Game(models.Model):
     date_time = models.DateTimeField(null=True)

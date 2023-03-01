@@ -47,7 +47,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         player.save()
-
+        
         return user
 
 # Login Serializer
