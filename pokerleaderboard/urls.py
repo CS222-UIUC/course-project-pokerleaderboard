@@ -20,9 +20,16 @@ from . import views
 
 router = routers.DefaultRouter()
 
+router.register('players', views.PlayerViewSet, basename='player')
+router.register('games', views.GameViewSet, basename='game')
+router.register('buy-ins', views.BuyInViewSet, basename='buyin')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('start_game/', views.GameViewSet.as_view({'post': 'start_game'}), name='start_game'),
+    path('games/<int:pk>/end_game/', views.GameViewSet.as_view({'post': 'end_game'}), name='end_game'),
+    # path('', views.leaderboard_view, name='leaderboard'), # TODO this needs to be linked to the frontend html
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index, name='index'),
     path('', include('accounts.urls'))
