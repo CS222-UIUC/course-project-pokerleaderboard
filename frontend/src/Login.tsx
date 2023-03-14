@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import card from './card.png'
+import card from "./assets/images/card.png"
 import axios from "axios"
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -25,11 +25,11 @@ export const Login = (props) => {
             <h1>Poker Leaderboard</h1>
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input value={username} onChange={(e) => setUser(e.target.value)} type="username" placeholder="Username" id="username" name="username"  />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
-                <button type="submit" target="_blank">Log In</button>
+                <button type="submit">Log In</button>
             </form>
             <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register Here.</button>
         </div>
