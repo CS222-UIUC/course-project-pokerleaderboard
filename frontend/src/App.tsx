@@ -1,19 +1,24 @@
 import React, { useState } from "react"
-import './assets/styles/App.css';
-import { Login } from "./Login"
-import { Register } from "./Register"
+import "./assets/styles/App.css";
+import { Leaderboard } from "./Leaderboard";
+import { Login } from "./Login";
+import { Register } from "./Register";
 
-function App() {
+const App = () => {
   const [currentForm, setCurrentForm] = useState('login');
+  const [authenticated, setAuthenticated] = useState(false);
 
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
 
   return (
-    <div className="App">
+    <div className={ authenticated ? "App-unauth" : "App-auth" }>
       {
-        currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>
+      
+        //currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
+      
+        <Leaderboard />
       }
     </div>
   );

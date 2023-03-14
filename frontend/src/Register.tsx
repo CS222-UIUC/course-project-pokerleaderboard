@@ -1,10 +1,16 @@
 import React, { useState } from "react"
 import axios from "axios"
+import card from "./assets/images/card.png"
+import './assets/styles/auth.css';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const Register = (props) => {
+interface IProps {
+    onFormSwitch: Function;
+}
+
+export const Register = ({ onFormSwitch }: IProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -22,6 +28,8 @@ export const Register = (props) => {
 
     return (
         <div className="auth-form-container">
+            <img src={card} alt="logo" className="logo"></img>
+            <h1>Poker Leaderboard</h1>
             <h2>Register</h2>
             <form className="register-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
@@ -32,7 +40,7 @@ export const Register = (props) => {
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
                 <button type="submit">Register</button>
             </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
+            <button className="link-btn" onClick={() => onFormSwitch('login')}>Already have an account? Login here.</button>
         </div>
     )
 }
