@@ -42,7 +42,7 @@ export const Leaderboard = () => {
                 <td>{ data["curr_amount"] }</td>
                 <td>{ data["peak_amount"] }</td>
                 <td>
-                <div className="buttons" style={{ "justifyContent": "center" }}>
+                <div className="buttons" style={{ "display": "flex", "justifyContent": "center" }}>
                     <button className="button is-danger is-small is-outlined remove-button">Remove</button>
                 </div>
                 </td>

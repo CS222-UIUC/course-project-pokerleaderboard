@@ -1,0 +1,24 @@
+.ant-transfer {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    .ant-transfer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .ant-transfer-list {
+        min-width: 250px !important;
+    }
+    .ant-transfer-operation {
+        margin: 1rem 0 !important;
+    }
+    .ant-transfer-operation > * {
+        margin: 0.5rem 0;
+        min-height: 50px !important;
+    }
+    .ant-transfer-list-content-item {
+        min-height: 3rem !important;
+    }
+}
