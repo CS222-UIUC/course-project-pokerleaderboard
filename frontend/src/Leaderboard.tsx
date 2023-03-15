@@ -42,7 +42,7 @@ export const Leaderboard = () => {
                 <td>{ data["curr_amount"] }</td>
                 <td>{ data["peak_amount"] }</td>
                 <td>
-                <div className="buttons">
+                <div className="buttons" style={{ "justifyContent": "center" }}>
                     <button className="button is-danger is-small is-outlined remove-button">Remove</button>
                 </div>
                 </td>
@@ -53,13 +53,13 @@ export const Leaderboard = () => {
         <section className="section">
             <div className="container">
                 <h1 className="title">Poker Leaderboard</h1>
-                <table className="table is-striped is-hoverable is-fullwidth">
+                <table className="table is-striped is-hoverable is-fullwidth" style={{ "textAlign": "center" }}>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Current Amount</th>
-                            <th>Peak Amount</th>
-                            <th>Action</th>
+                            <th style={{ "textAlign": "center" }}>Name</th>
+                            <th style={{ "textAlign": "center" }}>Current Amount</th>
+                            <th style={{ "textAlign": "center" }}>Peak Amount</th>
+                            <th style={{ "textAlign": "center" }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
