@@ -20,7 +20,7 @@ const App = () => {
       
         //currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
       
-        <EndGame />
+        <StartGame />
       }
     </div>
   );
