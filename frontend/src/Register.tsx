@@ -1,10 +1,16 @@
 import React, { useState } from "react"
 import axios from "axios"
+import card from "./assets/images/card.png"
+import './assets/styles/auth.css';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const Register = (props) => {
+interface IProps {
+    onFormSwitch: Function;
+}
+
+export const Register = ({ onFormSwitch }: IProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -22,17 +28,19 @@ export const Register = (props) => {
 
     return (
         <div className="auth-form-container">
+            <img src={card} alt="logo" className="logo"></img>
+            <h1>Poker Leaderboard</h1>
             <h2>Register</h2>
             <form className="register-form" onSubmit={handleSubmit}>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" id="email" name="email"  />
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Username" id="username" name="username"  />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
-                <button type="submit" target="_blank">Register</button>
+                <button type="submit">Register</button>
             </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here.</button>
+            <button className="link-btn" onClick={() => onFormSwitch('login')}>Already have an account? Login here.</button>
         </div>
     )
 }
