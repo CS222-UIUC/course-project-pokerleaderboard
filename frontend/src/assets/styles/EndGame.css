@@ -1,0 +1,13 @@
+.input-amounts-div {
+    display: grid; 
+    grid-template-columns: 1fr 2fr;
+    row-gap: 1rem;
+    margin: 2rem 0;
+    width: 45%;
+}
+
+@media screen and (max-width: 600px) {
+    .input-amounts-div {
+        width: 100%;
+    }
+}
