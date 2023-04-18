@@ -10,25 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+import dj_database_url
+from django.test.runner import DiscoverRunner
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+BASE_DIR = Path(__file__).resolve().parent.parent
+IS_HEROKU = "DYNO" in os.environ
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-5lp7y=*lqy5@hgn*48f@y&nry0^^)5(saym^4o1dkw=-9j*p4o'
-
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dcd8435c-ea2e-4615-bf20-310fbe3e0a20')
+if 'SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+if IS_HEROKU:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'leaderboard',
     'accounts',
-    'knox'
+    'knox',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
