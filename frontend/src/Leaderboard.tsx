@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./assets/styles/bulma.min.css";
 
-
+// Two default xsrf token headers for axios. 
+// These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+// The Leaderboard page component
 export const Leaderboard = () => { 
+    // State to hold the data of each Player
     const [playerData, setPlayerData] = useState([
         {
             "name": "Daniel",
@@ -34,7 +37,10 @@ export const Leaderboard = () => {
             "peak_amount": 2
         }
     ]);
+
     let rows = [];
+
+    // Creating rows to display Player data and the option to remove the Player
     playerData.forEach(data =>
         rows.push(
             <tr>
@@ -49,6 +55,7 @@ export const Leaderboard = () => {
             </tr>
         )
     );
+
     return (
         <section className="section">
             <div className="container">

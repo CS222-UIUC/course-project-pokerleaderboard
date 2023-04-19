@@ -3,6 +3,8 @@ import axios from "axios"
 import card from "./assets/images/card.png"
 import './assets/styles/auth.css';
 
+// Two default xsrf token headers for axios. 
+// These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
@@ -10,11 +12,16 @@ interface IProps {
     onFormSwitch: Function;
 }
 
+// The Register page component
+// The onFormSwitch prop is the function used to switch between the login and register pages
 export const Register = ({ onFormSwitch }: IProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
+    // This function is called and an HTTP POST request is made to the server's API endpoint
+    // with the user's information. The API endpoint URL is hardcoded to 
+    // http://127.0.0.1:8000/api/auth/register
     const handleSubmit = async (e) => {
         e.preventDefault();
 

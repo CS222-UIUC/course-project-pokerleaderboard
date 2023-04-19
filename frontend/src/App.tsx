@@ -7,9 +7,14 @@ import { Register } from "./Register";
 import { StartGame } from "./StartGame";
 
 const App = () => {
+
+  // State to hold current page (Login/Register)
   const [currentForm, setCurrentForm] = useState('login');
+
+  // State to hold auth status of user
   const [authenticated, setAuthenticated] = useState(false);
 
+  // Function to switch between Login and Register
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
@@ -19,8 +24,8 @@ const App = () => {
       {
         //currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
       
-        <EndGame />
       }
+      <EndGame />
     </div>
   );
 }
