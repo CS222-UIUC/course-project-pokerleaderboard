@@ -23,7 +23,6 @@ const App = () => {
     <div className={ authenticated ? "App-unauth" : "App-auth" }>
       {
         //currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
-      
       }
       <EndGame />
     </div>
