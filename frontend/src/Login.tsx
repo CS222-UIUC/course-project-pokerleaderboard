@@ -38,11 +38,15 @@ export const Login = ({ onFormSwitch }: IProps) => {
             <h1>Poker Leaderboard</h1>
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
-                <input value={username} onChange={(e) => setUser(e.target.value)} type="username" placeholder="Username" id="username" name="username"  />
-                <label htmlFor="password">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
-                <button type="submit">Log In</button>
+                <div className="label-holder">
+                    <label htmlFor="username">Username</label>
+                </div>
+                <input value={username} onChange={(e) => setUser(e.target.value)} type="username" placeholder="Username" id="username" name="username" style={{"marginBottom": "1rem"}}   />
+                <div className="label-holder">
+                    <label htmlFor="password">Password</label>
+                </div>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" style={{"marginBottom": "1rem"}} />
+                <button type="submit">LOGIN</button>
             </form>
             <button className="link-btn" onClick={() => onFormSwitch('register')}>Don't have an account? Register Here.</button>
         </div>

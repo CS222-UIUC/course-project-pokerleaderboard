@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Transfer } from "antd";
 import "./assets/styles/bulma.min.css";
-import "./assets/styles/StartGame.css"
+import "./assets/styles/StartGame.css";
 
 // Two default xsrf token headers for axios. 
 // These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
