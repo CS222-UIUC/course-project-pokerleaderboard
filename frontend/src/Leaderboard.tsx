@@ -1,86 +1,97 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import "./assets/styles/bulma.min.css";
 
+export const Leaderboard = () => {
+  const [playerData, setPlayerData] = useState([]);
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/leaderboard/api/players/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setPlayerData(data));
+  }, []);
 
-export const Leaderboard = () => { 
-    const [playerData, setPlayerData] = useState([
-        {
-            "name": "Daniel",
-            "curr_amount": 114.0,
-            "peak_amount": 126
-        },
-        {
-            "name": "Yejun",
-            "curr_amount": 10.0,
-            "peak_amount": 10
-        },
-        {
-            "name": "Pedro",
-            "curr_amount": 0.0,
-            "peak_amount": 0
-        },
-        {
-            "name": "Koki",
-            "curr_amount": 0.0,
-            "peak_amount": 0
-        },
-        {
-            "name": "Justin",
-            "curr_amount": -25.0,
-            "peak_amount": 2
-        }
-    ]);
-    let rows = [];
-    playerData.forEach(data =>
-        rows.push(
-            <tr>
-                <td>{ data["name"] }</td>
-                <td>{ data["curr_amount"] }</td>
-                <td>{ data["peak_amount"] }</td>
-                <td>
-                <div className="buttons" style={{ "display": "flex", "justifyContent": "center" }}>
-                    <button className="button is-danger is-small is-outlined remove-button">Remove</button>
-                </div>
-                </td>
-            </tr>
-        )
-    );
-    return (
-        <section className="section">
-            <div className="container">
-                <h1 className="title">Poker Leaderboard</h1>
-                <table className="table is-striped is-hoverable is-fullwidth" style={{ "textAlign": "center" }}>
-                    <thead>
-                        <tr>
-                            <th style={{ "textAlign": "center" }}>Name</th>
-                            <th style={{ "textAlign": "center" }}>Current Amount</th>
-                            <th style={{ "textAlign": "center" }}>Peak Amount</th>
-                            <th style={{ "textAlign": "center" }}>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    { rows }
-                    </tbody>
-                </table>
-                <form className="form" id="add-form">
-                    <div className="field">
-                        <label className="label" htmlFor="" id="name-input">Name</label>
-                        <div className="control">
-                            <input className="input" type="text" id="name-input" placeholder="Name" />
-                        </div>
-                    </div>
+  const handleRemovePlayer = (id) => {
+    fetch(`http://127.0.0.1:8000/leaderboard/api/players/${id}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      setPlayerData(playerData.filter((player) => player.id !== id));
+    });
+  };
 
-                    <div className="field">
-                        <div className="control">
-                            <button className="button is-link" type="submit">Add Player</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
+  let rows = [];
+  playerData.forEach((data) =>
+    rows.push(
+      <tr key={data.id}>
+        <td>{data.name}</td>
+        <td>{data.current_amount}</td>
+        <td>{data.peak_amount}</td>
+        <td>
+          <div
+            className="buttons"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <button
+              className="button is-danger is-small is-outlined remove-button"
+              onClick={() => handleRemovePlayer(data.id)}
+            >
+              Remove
+            </button>
+          </div>
+        </td>
+      </tr>
     )
-}
+  );
+  return (
+    <section className="section">
+      <div className="container">
+        <h1 className="title">Poker Leaderboard</h1>
+        <table
+          className="table is-striped is-hoverable is-fullwidth"
+          style={{ textAlign: "center" }}
+        >
+          <thead>
+            <tr>
+              <th style={{ textAlign: "center" }}>Name</th>
+              <th style={{ textAlign: "center" }}>Current Amount</th>
+              <th style={{ textAlign: "center" }}>Peak Amount</th>
+              <th style={{ textAlign: "center" }}>Action</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </table>
+        <form className="form" id="add-form">
+          <div className="field">
+            <label className="label" htmlFor="" id="name-input">
+              Name
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                id="name-input"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="control">
+              <button className="button is-link" type="submit">
+                Add Player
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+};
+

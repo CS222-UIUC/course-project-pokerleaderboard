@@ -16,22 +16,15 @@ export const StartGame = () => {
         getPlayers();
     }, []);
 
-    const getPlayers = () => {
-        let ls = [];
-        let players = [
-            "Daniel",
-            "Yejun",
-            "Justin",
-            "Pedro"
-        ];
-        players.forEach((name, index) => {
-            let data = {
-                "key": name,
-            };
-            ls.push(data);
-        });
-        setDeselectedPlayers(ls);
-    }
+    const getPlayers = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/leaderboard/api/players/');
+            const players = response.data.map(({ name }) => ({ key: name }));
+            setDeselectedPlayers(players);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleChange = (selectedPlayers) => {
         setSelectedPlayers(selectedPlayers);
@@ -70,8 +63,8 @@ export const StartGame = () => {
                         <button className="button is-success" type="submit">Start Game</button>
                         </div>
                     </div>
-                    </form>
+                </form>
             </div>
         </section>
-    )
-}
+    );
+};
