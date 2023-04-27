@@ -105,6 +105,7 @@ export const Leaderboard = ({ onFormSwitch }) => {
             </div>
           </div>
 
+
           <div className="field">
             <div className="control">
               <button className="button is-link" type="submit">

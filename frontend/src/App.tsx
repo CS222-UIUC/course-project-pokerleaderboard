@@ -7,12 +7,15 @@ import { Register } from "./Register";
 import { StartGame } from "./StartGame";
 
 const App = () => {
+
+  // State to hold current page (Login/Register)
   const [currentForm, setCurrentForm] = useState('login');
   const [authenticated, setAuthenticated] = useState(true);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
   const toggleForm = (formName, selectedPlayers?) => {
     setSelectedPlayers(selectedPlayers);
+
     setCurrentForm(formName);
     if (formName === 'login' || formName === 'register') {
       setAuthenticated(true);
@@ -22,7 +25,7 @@ const App = () => {
   }
 
   return (
-    <div className={ authenticated ? "App-unauth" : "App-auth" }>
+    <div className={ authenticated ? "App-auth" : "App-unauth" }>
       {
       (() => {
         if (currentForm === "login") {
