@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./assets/styles/bulma.min.css";
 import "./assets/styles/EndGame.css"
@@ -6,6 +6,7 @@ import "./assets/styles/EndGame.css"
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+// The EndGame page component
 export const EndGame = () => { 
     const [players, setPlayers] = useState([]);
 
@@ -29,6 +30,7 @@ export const EndGame = () => {
             <input className="input" type="number" id={`${name}-amount`} placeholder={`Enter final amount for ${name}`} />
         </React.Fragment>
     ));
+
 
     return (
         <section className="section">
