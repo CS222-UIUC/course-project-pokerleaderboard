@@ -39,12 +39,18 @@ export const Register = ({ onFormSwitch }: IProps) => {
             <h1>Poker Leaderboard</h1>
             <h2>Register</h2>
             <form className="register-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" id="email" name="email"  />
-                <label htmlFor="username">Username</label>
-                <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Username" id="username" name="username"  />
-                <label htmlFor="password">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
+                <div className="label-holder">  
+                    <label htmlFor="email">Email</label>
+                </div>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" id="email" name="email" style={{"marginBottom": "1rem"}}  />
+                <div className="label-holder">
+                    <label htmlFor="username">Username</label>
+                </div>
+                <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="Username" id="username" name="username" style={{"marginBottom": "1rem"}} />
+                <div className="label-holder">
+                    <label htmlFor="password">Password</label>
+                </div>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" style={{"marginBottom": "1rem"}} />
                 <button type="submit">Register</button>
             </form>
             <button className="link-btn" onClick={() => onFormSwitch('login')}>Already have an account? Login here.</button>

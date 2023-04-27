@@ -12,7 +12,7 @@ const App = () => {
   const [currentForm, setCurrentForm] = useState('login');
 
   // State to hold auth status of user
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(true);
 
   // Function to switch between Login and Register
   const toggleForm = (formName) => {
@@ -20,11 +20,11 @@ const App = () => {
   }
 
   return (
-    <div className={ authenticated ? "App-unauth" : "App-auth" }>
+    <div className={ authenticated ? "App-auth" : "App-unauth" }>
       {
         //currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
       }
-      <EndGame />
+      <Leaderboard />
     </div>
   );
 }
