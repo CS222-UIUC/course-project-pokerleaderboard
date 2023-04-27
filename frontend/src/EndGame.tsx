@@ -3,34 +3,34 @@ import axios from "axios";
 import "./assets/styles/bulma.min.css";
 import "./assets/styles/EndGame.css"
 
-// Two default xsrf token headers for axios. 
-// These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 // The EndGame page component
 export const EndGame = () => { 
-    // Array to hold Player names
-    const players = [
-        "Daniel",
-        "Yejun",
-        "Justin",
-        "Pedro"
-    ];
+    const [players, setPlayers] = useState([]);
 
-    let rows = [];
+    useEffect(() => {
+        getPlayers();
+    }, []);
 
-    // Creating rows with each containing an input to enter the final amount for the corresponding Player
-    players.forEach((name, index) => {
-        rows.push(
-            <>
-                <label htmlFor={`${name}-amount`}>
-                    {name}
-                </label>
-                <input className="input" type="number" id={`${name}-amount`} placeholder={`Enter final amount for ${name}`} />
-            </>
-        );
-    });
+    const getPlayers = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/leaderboard/api/players/");
+            const playersData = response.data.map(player => player.name);
+            setPlayers(playersData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const rows = players.map((name, index) => (
+        <React.Fragment key={name}>
+            <label htmlFor={`${name}-amount`}>{name}</label>
+            <input className="input" type="number" id={`${name}-amount`} placeholder={`Enter final amount for ${name}`} />
+        </React.Fragment>
+    ));
+
 
     return (
         <section className="section">
@@ -46,10 +46,10 @@ export const EndGame = () => {
                     </div>
                     <div className="field">
                         <div className="control">
-                        <button className="button is-success" type="submit">End Game</button>
+                            <button className="button is-success" type="submit">End Game</button>
                         </div>
                     </div>
-                    </form>
+                </form>
             </div>
         </section>
     )
