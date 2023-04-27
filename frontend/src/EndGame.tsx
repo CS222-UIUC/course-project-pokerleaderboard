@@ -6,25 +6,15 @@ import "./assets/styles/EndGame.css"
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-// The EndGame page component
-export const EndGame = () => { 
+export const EndGame = ({ onFormSwitch , selectedPlayers }) => { 
+
     const [players, setPlayers] = useState([]);
 
     useEffect(() => {
-        getPlayers();
+
     }, []);
 
-    const getPlayers = async () => {
-        try {
-            const response = await axios.get("http://127.0.0.1:8000/leaderboard/api/players/");
-            const playersData = response.data.map(player => player.name);
-            setPlayers(playersData);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const rows = players.map((name, index) => (
+    const rows = selectedPlayers.map((name) => (
         <React.Fragment key={name}>
             <label htmlFor={`${name}-amount`}>{name}</label>
             <input className="input" type="number" id={`${name}-amount`} placeholder={`Enter final amount for ${name}`} />
@@ -46,7 +36,7 @@ export const EndGame = () => {
                     </div>
                     <div className="field">
                         <div className="control">
-                            <button className="button is-success" type="submit">End Game</button>
+                            <button className="button is-success" type="submit" onClick={() => onFormSwitch('leaderboard')}>End Game</button>
                         </div>
                     </div>
                 </form>
