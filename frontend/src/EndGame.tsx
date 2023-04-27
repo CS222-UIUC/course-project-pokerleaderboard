@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./assets/styles/bulma.min.css";
 import "./assets/styles/EndGame.css"
 
-
+// Two default xsrf token headers for axios. 
+// These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+// The EndGame page component
 export const EndGame = () => { 
+    // Array to hold Player names
     const players = [
         "Daniel",
         "Yejun",
@@ -17,6 +20,7 @@ export const EndGame = () => {
 
     let rows = [];
 
+    // Creating rows with each containing an input to enter the final amount for the corresponding Player
     players.forEach((name, index) => {
         rows.push(
             <>

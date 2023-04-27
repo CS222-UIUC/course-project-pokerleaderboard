@@ -4,18 +4,22 @@ import { Transfer } from "antd";
 import "./assets/styles/bulma.min.css";
 import "./assets/styles/StartGame.css"
 
-
+// Two default xsrf token headers for axios. 
+// These headers are used to protect against CSRF (Cross-Site Request Forgery) attacks.
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
+// The StartGame page component
 export const StartGame = () => { 
     const [deselectedPlayers, setDeselectedPlayers] = useState([]); 
     const [selectedPlayers, setSelectedPlayers] = useState([]);
 
+    // The useEffect hook is used to fetch the list of players when the component mounts.
     useEffect(() => {
         getPlayers();
     }, []);
 
+    // This function sets the list of players by creating an array of objects containing the player names.
     const getPlayers = () => {
         let ls = [];
         let players = [
@@ -33,6 +37,7 @@ export const StartGame = () => {
         setDeselectedPlayers(ls);
     }
 
+    // This function updates the state of the selected players whenever a player is selected or deselected.
     const handleChange = (selectedPlayers) => {
         setSelectedPlayers(selectedPlayers);
     };
