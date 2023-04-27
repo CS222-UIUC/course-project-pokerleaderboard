@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./assets/styles/bulma.min.css";
 
-export const Leaderboard = () => {
+export const Leaderboard = ({ onFormSwitch }) => {
   const [playerData, setPlayerData] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,28 @@ export const Leaderboard = () => {
     }).then(() => {
       setPlayerData(playerData.filter((player) => player.id !== id));
     });
+  };
+
+  const handleAddPlayer = (event) => {
+    event.preventDefault();
+    const name = event.target.elements.name.value;
+  
+    fetch("http://127.0.0.1:8000/leaderboard/api/players/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        current_amount: 0,
+        peak_amount: 0
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPlayerData([...playerData, data]);
+        event.target.reset();
+      });
   };
 
   let rows = [];
@@ -67,18 +89,19 @@ export const Leaderboard = () => {
           </thead>
           <tbody>{rows}</tbody>
         </table>
-        <form className="form" id="add-form">
+        <form className="form" id="add-form" onSubmit={handleAddPlayer}>
           <div className="field">
             <label className="label" htmlFor="" id="name-input">
               Name
             </label>
             <div className="control">
-              <input
-                className="input"
-                type="text"
-                id="name-input"
-                placeholder="Name"
-              />
+            <input
+              className="input"
+              type="text"
+              id="name-input"
+              name="name"
+              placeholder="Name"
+            />
             </div>
           </div>
 
@@ -89,6 +112,15 @@ export const Leaderboard = () => {
               </button>
             </div>
           </div>
+
+          <div className="field">
+            <div className="control">
+              <button className="button is-link" type="submit" onClick={() => onFormSwitch('startGame')}>
+                Play Again?
+              </button>
+            </div>
+          </div>
+
         </form>
       </div>
     </section>

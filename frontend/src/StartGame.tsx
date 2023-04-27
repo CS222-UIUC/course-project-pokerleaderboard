@@ -8,19 +8,27 @@ import "./assets/styles/StartGame.css"
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
-export const StartGame = () => { 
+export const StartGame = ({ onFormSwitch }) => { 
     const [deselectedPlayers, setDeselectedPlayers] = useState([]); 
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+    const [playerIds, setPlayerIds] = useState([]);
+    const [buyIn, setBuyIn] = useState(0);
 
     useEffect(() => {
         getPlayers();
     }, []);
 
+    const handleBuyInChange = (event) => {
+        setBuyIn(event.target.value);
+    }
+
     const getPlayers = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/leaderboard/api/players/');
             const players = response.data.map(({ name }) => ({ key: name }));
+            const ids = response.data.map(({ id }) => ({ key: id }));
             setDeselectedPlayers(players);
+            setPlayerIds(ids);
         } catch (error) {
             console.error(error);
         }
@@ -29,6 +37,21 @@ export const StartGame = () => {
     const handleChange = (selectedPlayers) => {
         setSelectedPlayers(selectedPlayers);
     };
+
+    const handleSubmit = () => {
+        fetch("http://127.0.0.1:8000/leaderboard/start_game/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                date_time: null,
+                id: playerIds,
+                buy_in: buyIn,
+            }),
+        })
+        onFormSwitch('endGame', selectedPlayers);
+    }
 
     return (
         <section className="section">
@@ -55,12 +78,24 @@ export const StartGame = () => {
                     <div className="field">
                         <label className="label" htmlFor="buy-in">Buy-In Amount:</label>
                         <div className="control">
-                        <input className="input" id="buy-in" name="buy-in" type="number" />
+                        <input 
+                            className="input"
+                            id="buy-in"
+                            name="buy-in"
+                            type="number"
+                            value={buyIn}
+                            onChange={handleBuyInChange}
+                            />
                         </div>
                     </div>
                     <div className="field">
                         <div className="control">
-                        <button className="button is-success" type="submit">Start Game</button>
+                        <button className="button is-success" type="submit" onClick={handleSubmit}>I am ready!</button>
+                        </div>
+                    </div>
+                    <div className="field">
+                        <div className="control">
+                        <button className="button is-success" onClick={() => onFormSwitch('leaderboard')}>View Leaderboard</button>
                         </div>
                     </div>
                 </form>

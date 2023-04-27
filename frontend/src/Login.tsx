@@ -34,7 +34,7 @@ export const Login = ({ onFormSwitch }: IProps) => {
                 <input value={username} onChange={(e) => setUser(e.target.value)} type="username" placeholder="Username" id="username" name="username"  />
                 <label htmlFor="password">Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*********" id="password" name="password" />
-                <button type="submit">Log In</button>
+                <button type="submit" onClick={() => onFormSwitch('startGame')}>Log In</button>
             </form>
             <button className="link-btn" onClick={() => onFormSwitch('register')}>Don't have an account? Register Here.</button>
         </div>
