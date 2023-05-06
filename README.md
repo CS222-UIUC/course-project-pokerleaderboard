@@ -5,26 +5,31 @@ Poker Leaderboard is a project aimed at helping friends keep track of poker game
 
 ## Technical Architecture
 ### Backend
-Python with Django REST framework
-PostgreSQL database
-Google OAuth for authentication
-Web-sockets for notifications
+<ul>
+<li>Python with Django REST framework
+<li>PostgreSQL database
+<li>Google OAuth for authentication
+<li>Web-sockets for notifications
+</ul>
+
 ### Frontend
-ReactJS
-TypeScript
-Jest testing framework
+<ul>
+<li>ReactJS
+<li>TypeScript
+<li>Jest testing framework
+</ul>
 
 ## Reproducible Installation Instructions
 ### Backend
-Set up the Django environment.
-Run ```python manage.py runserver```, if prompted run ```python manage.py migrate```
-Install requirements from the requirements.txt file.
+Set up the Django environment.<br>
+Run ```python manage.py runserver```, if prompted run ```python manage.py migrate```<br>
+Install requirements from the `requirements.txt` file.<br>
 
 
 ### Frontend
-Set up the ReactJS environment.
-Run ```npm run build```
-Install dependencies from the package.json file.
+Set up the ReactJS environment.<br>
+Run ```npm run build```<br>
+Install dependencies from the `package.json` file.<br>
 
 ### Database
 Install and configure PostgreSQL.
@@ -41,6 +46,6 @@ Cross-team support and weekly planning
 
 
 ## Potential Risks and Teamwork
-Risk Management: Strategies to handle potential risks
-Teamwork: Clear division of roles and collaboration across teams
-Continuous Integration: Use of unittest, Jest, pre-commit, and code reviews
+<b>Risk Management</b>: Strategies to handle potential risks<br>
+<b>Teamwork</b>: Clear division of roles and collaboration across teams<br>
+<b>Continuous Integration</b>: Use of unittest, Jest, pre-commit, and code reviews<br>
