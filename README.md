@@ -31,9 +31,9 @@ Install and configure PostgreSQL.
 
 
 ## Team Members and Their Roles
-Daniel: Fullstack development
-Danish: Fullstack development
-Yejun: Frontend development
+<a href="https://github.com/danielodicho">Daniel Odicho</a>: Fullstack developer<br>
+<a href="https://github.com/DSS3113">Danish Singh Sethi</a>: Fullstack developer<br>
+<a href="https://github.com/Y3JUN">Yejun Park</a>: Frontend developer<br>
 
 
 ## Collaboration: 
